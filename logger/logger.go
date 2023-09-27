@@ -15,11 +15,11 @@ var (
 	pkgLogger     Logger = LogRLogger(discardLogger)
 )
 
-// InitLogConfig initializes a Zap-based logger
-func InitLogConfig(conf *Config, name string) {
+// InitLogConfig 初始化已定义日志
+func InitLogConfig(conf *Config) {
 	l, err := NewZapLogger(conf)
 	if err == nil {
-		SetLogger(l, name)
+		SetLogger(l, "OpsLink")
 	}
 }
 
@@ -212,6 +212,7 @@ func (l *ZapLogger) ToZap() *zap.SugaredLogger {
 	return l.zap
 }
 
+// 动态更新日志等级，后续使用
 func (cfg *sharedConfig) onConfigUpdate(conf *Config) error {
 	// 设置最新的日志等级
 	cfg.level.SetLevel(ParseZapLevel(conf.Level))
@@ -235,8 +236,7 @@ func (cfg *sharedConfig) onConfigUpdate(conf *Config) error {
 	return nil
 }
 
-// ensure we have an atomic level in the map representing the full component path
-// this makes it possible to update the log level after the fact
+// 动态更新日志等级，后续使用
 func (c *sharedConfig) setEffectiveLevel(component string) zap.AtomicLevel {
 	c.lc.Lock()
 	defer c.lc.Unlock()
