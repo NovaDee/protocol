@@ -1,4 +1,4 @@
-module github.com/denovo/protocol
+module github.com/oppslink/protocol
 
 go 1.20
 
