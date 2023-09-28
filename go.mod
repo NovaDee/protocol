@@ -1,4 +1,4 @@
-module github.com/NovaDee/protocol
+module github.com/denovo/protocol
 
 go 1.20
 
