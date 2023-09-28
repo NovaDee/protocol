@@ -16,10 +16,10 @@ var (
 )
 
 // InitLogConfig 初始化已定义日志
-func InitLogConfig(conf *Config) {
-	l, err := NewZapLogger(conf)
+func InitLogConfig(conf Config, system string) {
+	l, err := NewZapLogger(&conf)
 	if err == nil {
-		SetLogger(l, "OpsLink")
+		SetLogger(l, system)
 	}
 }
 
