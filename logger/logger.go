@@ -121,6 +121,7 @@ func NewZapLogger(conf *Config) (*ZapLogger, error) {
 	if conf.JSON {
 		zc.Encoding = "json"
 		zc.EncoderConfig = zap.NewProductionEncoderConfig()
+		zc.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	}
 	build, err := zc.Build()
 	if err != nil {
